@@ -1,0 +1,79 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.form-container {
+    max-width: 800px;
+    text-align: center;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-family: serif;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.form-container input[type="file"] {
+    margin-bottom: 30px;
+    padding: 5px;
+    text-align: center;
+    font-size:larger;
+}
+
+.form-container input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4C8A50;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: serif;
+    font-size: 125%
+    
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Pagina de downlowad para o arquivo convertido */
+
+.div-format {
+    text-align: center;
+    color: rgb(80, 80, 80);
+    font-family: serif;
+    /* padding: 20px; */
+}
+
+.div-container h2 {
+    padding: 20px;
+    font-size: 200%;
+}
+
+.btn-download {
+  background-color: #4CAF50; /* cor de fundo */
+  color: white; /* cor do texto */
+  font-family: serif;
+  padding: 10px 20px; /* Espaçamento interno */
+  text-decoration: none; /* remover sublinhado do link */
+  border: none; /* remover a borda */
+  cursor: pointer; /* Cursor de seta ao passar o mouse */
+  font-size: 20px; /* Tamanho da fonte */
+  text-align: center;
+  border-radius: 7px;
+}
+
+.btn-download:hover {
+  background-color: #45a049; /* Cor de fundo ao passar o mouse */
+}

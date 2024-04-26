@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Conversor PDF para TXT {% endblock %}
+{% block content %}
+  <link rel="stylesheet" href="../static/css/style_conversor.css">
+  <title>Download arquivo</title>
+
+
+     <!-- Faz o download do arquivo convertido -->
+  <div class="div-format"> 
+    <div class="div-container"> 
+      <h2> Arquivo convertido com sucesso! </h2>
+      {% if arquivo_convertido %}
+      <a href="{{ url_for('conversor.download_txt', file=arquivo_convertido) }}" download> <button class="btn-download"> Download </button> </a>
+      {% endif %}
+    </div>
+  </div>
+  {% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base login.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class='text-center'>Favor efetuar o login ou registra-se</h3>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+            <h3 class="text-center font-weight-bolder">Login</h4>
+            <form action='/auth' method="POST">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name='email' placeholder='Login do Usuario' id="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" class="form-control" name='senha' placeholder='Senha' id="password" required>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-outline-primary btn-block font-weight-bold" id="loginBtn"><span class="bi bi-box-arrow-in-right mr-2"></span>Entrar</button>
+                    </div>
+              
+            
+               
+            </div>                  
+        </form>    
+        
+        <div class="col">
+            <button type="button" class="btn btn-outline-info btn-block font-weight-bold" data-toggle="modal" data-target="#modalnew"><span class="bi bi-calendar2-check"></span> Cadastrar</button>
+        </div>           
+                 
+                
+    
+    
+            <!-- Modal -->
+            <!-- Formulario para adicionar novos Usúrios-->
+            <div id="modalnew" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Novo Usúario</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <!--Metodo Cadastrar Usuario--> 
+                            <form action="" id='novousuario' method="POST">
+                                <div class="form-group">
+                                    <label>Nome:</label>
+                                    <input type="text" class="form-control" name="nome" value="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sobrenome</label>
+                                    <input type="text" class="form-control" name="sobrenome" value="" >
+                                </div>
+                                <div class="form-group">
+                                    <label>Setor</label>
+                                    <input type="text" class="form-control" name="setor">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name='email' placeholder='E-mail' id="emailnovo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Telefone</label>
+                                    <input type="text" class="form-control" name="database" required=>
+                                </div>
+                                <div class="form-group">
+                                    <label>Senha:</label>
+                                    <input type="password" class="form-control" name="senha" id='novasenha' placeholder='8 caracteres com simbolos, numero e letras maiúsculas e minúsculas ' required>
+                                    <small id="password-message" class="text-muted"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Repetir senha:</label>
+                                    <input type="password" class="form-control" name="senha2" id='senharepetir' placeholder='Repetir senha anterior' required>
+                                    <small id="password-match-message" class="text-muted"></small>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn btn-primary " disabled type="submit" id='salvar'><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+                                    <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</div>
+{% endblock %}

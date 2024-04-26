@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+        />
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"
+        />
+        <link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!--<link rel="stylesheet" href="../static/css/style_conversor.css">-->
+        
+        <title>{% block title %} Pré-processamento - Menu {% endblock %}</title>
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav" id="navegacao">
+                    <a class="nav-item nav-link" id="menu" href="/"><span class="glyphicon glyphicon-th"></span> Menu principal</a>
+                    <a class="nav-item nav-link" id="conexao" href="{{ url_for('conexao.index') }}"><span class="glyphicon glyphicon-tasks"></span> Conexões</a>
+                    <a class="nav-item nav-link" id="conjunto_dados" href="{{ url_for('conjunto_dados.index') }}"><span class="glyphicon glyphicon-list-alt"></span> Conjunto de dados</a>
+                    <a class="nav-item nav-link" id="concatenar_tabelas" href="{{ url_for('concatenar_tabela.index') }}"><span class="glyphicon glyphicon-th-large"></span> Concatenador de tabelas</a>
+                    <a class="nav-item nav-link" id="uploadpdf" href="{{ url_for('conversor.index') }}"><span class="glyphicon glyphicon-font"></span> Conversor de documentos</a>
+                    
+                </div>
+              
+                    
+            </div>
+            <ul class="navbar-nav mr-5">
+                            
+                  <li class="nav-item" style="color:red;">
+                    <a class="nav-link mr-2" href="/login" >
+                        <span class='text-uppercase'>Nome do Usuario</span>
+                        </a>
+                    
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link mr-2" href="/login" >
+                        Sair
+                    <span class='bi bi-box-arrow-right'></span>
+                    </a>
+                  </li>
+                </ul>
+        </nav>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+        
+        <!-- Para páginas de conexões e conjuntos de dados-->
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+        <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <!--<script type="text/javascript" src="{{ url_for('static', filename='js/menu.js') }}"></script>-->
+
+        <!-- para páginas de concatenação de tabelas-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+        <script>           
+             $(document).ready(function() {
+                var currentPage = window.location.pathname; // Obtém o caminho da página atual
+                //Para cada link na div navegação. Se o atributo referência for igual a URL atual, adiciona class current no html
+                $('#navegacao a').each(function() {                                   
+                    if ($(this).attr('href') == currentPage) {
+                        $(this).css({'font-weight': 'bold',
+                        'text-decoration': 'underline',
+                        'text-transform': 'uppercase'});
+                    }
+                  });
+            });
+        </script>
+    </body>
+</html>

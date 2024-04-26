@@ -1,0 +1,300 @@
+{% extends "base.html" %} {% block title %} Conjuntos de dados {% endblock %} {% block content %}
+<!--<link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">-->
+
+<div class="container">
+   <div class="row">
+      <div class="col-lg md-12">
+         <div class="p-4">
+            <h2><span class="glyphicon glyphicon-list-alt"></span> Conjuntos de dados <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#modalAdd"><span class="glyphicon glyphicon-plus"></span> Novo Conjunto de dados</button></h2>
+         </div>
+
+         <!-- MENSAGEM DE SUCESSO -->
+         {%with messages = get_flashed_messages(category_filter=["success"])%}
+         {%if messages%}
+         {% for message in messages %}
+         <div class="alert alert-success alert-dismissable" role="alert">
+
+             <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                 <span aria-hidden="true">&times;</span>
+
+             </button>
+             {{message}}
+         </div>
+         {% endfor %}
+         {% endif %}
+         {% endwith %}
+
+         <!-- MENSAGEM DE ERRO -->
+         {%with errors = get_flashed_messages(category_filter=["error"])%}
+             {%if errors%}
+                 {% for error in errors %}
+                     <div class="alert alert-danger alert-dismissable" role="alert">
+
+                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                             <span aria-hidden="true">&times;</span>
+
+                         </button>
+                         {{error}}
+                     </div>
+                 {% endfor %}
+             {% endif %}
+         {% endwith %}
+
+         <!-- TABELA DA LISTA DE CONJUNTO E DADOS-->
+         <table class="table table-hover">
+            <tr>
+               <th class="text-center">ID</th>
+               <th class="text-center">Título</th>
+               <th class="text-center">Frequencia de Atualização</th>
+               <th class="text-center">Dia</th>
+               <th class="text-center">Schema</th>
+               <th class="text-center">Banco de dados</th>
+               <th class="text-center">Última Atualização</th>
+               <th class="text-center">Atualização automática</th>
+               <th class="text-center">Ações</th>
+            </tr>
+ 
+            <!-- LISTA DINAMICAMENTE AS CONEXÕES CADASTRADAS NO ARQUIVO JSON-->
+            <!-- Varivavel data de App.py - Conjunto de Dados-->
+            {% for row in data %}
+            <tr>
+               <td class="text-center">{{ row[0] }}</td> <!-- ID-->
+               <td class="text-center">{{ row[2] }}</td> <!-- Título -->
+               <td class="text-center">{{ row[3] }}</td> <!-- Freq. Atualização -->
+               <td class="text-center">{{ row[4] }}</td> <!-- Dia -->
+               <td class="text-center">{{ row[5] }}</td> <!-- Schema -->
+               <!-- <td class="text-center">{{ row[1] }}</td>--> <!-- Banco de dados -->
+               <td class="text-center"> <!-- Banco de dados -->
+                  <!-- Varivavel data_conn de App.py - Conjunto de Dados-->
+                  {% for database in data_conn %}
+                     {% if database[0] == row[1] %}
+                        {{ database[5] }}
+                     {% endif %}
+                  {% endfor %}
+               </td>
+               <td class="text-center">{{ "Recém cadastrado" if row[9] == 0 else row[9] }}</td> <!-- Última Atualização -->
+               <td class="text-center">{{ "Sim" if row[8] == 1 else "Não"}}</td> <!-- Atualização automática -->
+               <td class="text-center" class="col md-10">
+                  <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modalEdit{{ row[0] }}" title="Editar conjunto de dados"><span class="glyphicon glyphicon-pencil"></span></button>
+                  <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalUpdate{{ row[0] }}" title="Atualizar conjunto de dados no portal"><span class="glyphicon glyphicon-cloud-upload"></span></button>
+                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalDelete{{ row[0] }}" title="Remover conjunto de dados"><span class="glyphicon glyphicon-trash"></span></button>
+               </td>
+            </tr>
+
+            <!-- Formulário de Edição de conjunto de dados -->
+            <div id="modalEdit{{ row[0] }}" class="modal fade" role="dialog">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h4 class="modal-title">Editar conjunto de dados</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     </div>
+                     <div class="modal-body">
+                        <!--Metodo Ds_edit App.py Icone de Lapis-->
+                        <form action="{{ url_for('conjunto_dados.ds_edit', id=row[0] )}}" method="POST">
+                           <div class="form-group">
+                              <label>Título:</label>
+                              <input type="text" class="form-control" name="titulo" required="1" value='{{ row[2] }}'>
+                           </div>
+                           <div class="form-group">
+                              <label>Frequencia de atualização:</label>
+                              <select class="form-control" name="freq_atualizacao" required="1">
+                                 <option value='{{ row[3] }}'>Selecionado : {{ row[3] }}</option>
+            
+                                 <option value="diario">Diario</option>
+                                 <option value="semanal">Semanal</option>
+                                 <option value="mensal">Mensal</option>
+                                 <option value="semestral">Semestral</option>
+                                 <option value="anual">Anual</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label>Dia:</label>
+                              <select class="form-control" name="dia_atualizacao" required="1">
+                                 <option value='{{ row[4] }}'>Selecionado : {{ row[4] }}</option>
+                                 {% for day in range(1, 32) %}
+                                 <option value="{{ day }}">{{ day }}</option>
+                                 {% endfor %}
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              <label>Database</label>
+                              <!--<input type="text" class="form-control" name="database" required="1">-->
+                              <select class="form-control" name="database" required="1">
+                                 <!-- Opção selecionada anteriormente - Arrumar método melhor de seleção-->
+                                 {% for database in data_conn %}
+                                    {% if database[0] == row[1] %}
+                                       <option value='{{ row[1] }}' selected>Selecionado : {{ database[5] }}</option>
+                                    {% endif %}
+                                 {% endfor %}
+
+                                 <!-- Lista demais opções-->
+                                 {% for database in data_conn %}
+                                    <option value="{{ database[0] }}" >{{ database[5] }}</option>
+                                 {% endfor %}
+                              </select>                            
+                           </div>
+                           <div class="form-group">
+                              <label>Schema:</label>
+                              <input type="text" class="form-control" name="schema" required="1" value='{{ row[5] }}'>
+                           </div>
+                           <div class="form-group">
+                              <label>Tabela:</label>
+                              <input type="text" class="form-control" name="table" required="1" value='{{ row[6] }}'>
+                           </div>
+                           <div class="form-group">
+                              <label>Última atualização:</label>
+                              <input type="text" class="form-control" name="ultima_atualizacao" required="1" value='{{ row[9] }}'>
+                           </div>
+                           <div class="form-group">
+                              <label>Tipo de atualização</label>
+                              <select class="form-control" name="tipo_atualizacao" required="1">
+
+                                 
+                                 <option value='{{ row[7] }}' selected>Selecionado : {{ row[7] }}</option>
+                                 <option value="1">Simples</option>
+                                 <option value="2">Com concatenação</option>
+                              </select>
+                           </div>
+                           <div class="form-group text-center">
+                              <input type="checkbox" name="atualizacao_automatica" value="atualizacao_automatica" {% if row[8] == 1 %}checked{% endif %}>
+                              Atualização automática.
+                           </div>               
+                           <div class="form-group text-center">
+                              <input type="checkbox" name="metadata" value="1" {% if row[10] == 1 %}checked{% endif %}>
+                              Criar os metadados ao adicionar.
+                           </div>
+                           <div class="form-group text-center">
+                              <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+                              <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!--Fim da Edição do conjunto de dados-->
+            <!-- Formulário de atualização do conjunto de dados-->
+            <div id="modalUpdate{{ row[0] }}" class="modal fade" role="dialog">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-body text-center">
+                           <!--Metodo Ds_update App.py Icone de Nuvem-->
+                           <form action="{{ url_for('conjunto_dados.ds_update', id=row[0]) }}" method="POST">
+                              <label>Deseja atualizar o conjunto de dados "{{ row[2] }}" ?</label><br>
+                              <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Atualizar</button>
+                              <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                           </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!--Fim da atualização do conjunto de dados-->
+            <!-- Formulário de remoção do conjunto de dados-->
+            <div id="modalDelete{{ row[0] }}" class="modal fade" role="dialog">
+               <div class="modal-dialog">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h4 class="modal-title">Remover "{{ row[2] }}" </h4></h4>
+                           <button type="button" class="close" data-dismiss="modal">&times;</button>
+                       </div>
+                       <div class="modal-body text-center">
+                           <!--Metodo Ds_delete App.py Icone de Lixeira-->
+                           <form action="{{ url_for('conjunto_dados.ds_delete', id=row[0]) }}" method="POST">
+                               <label>Tem certeza de que deseja remover o conjunto de dados "{{ row[2] }}" ? Essa ação é irreversível.</label>
+                               <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Remover</button>
+                               <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <!-- Fim da remoção do conjunto de dados-->
+         {% endfor %}
+         </table>
+      </div>
+   </div>
+ 
+   <!-- Formulário de nova conexão-->
+   <div id="modalAdd" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h4 class="modal-title">Novo conjunto de dados</h4>
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <!--Metodo Ds_insert App.py-->
+               <!--action=""-->
+               <form action="{{url_for('conjunto_dados.ds_insert')}}" method="POST">
+                  <div class="form-group">
+                     <label>Título:</label>
+                     <input type="text" class="form-control" name="titulo" required="1">
+                  </div>
+                  <div class="form-group">
+                     <label>Frequencia de atualização:</label>
+                     <select class="form-control" name="freq_atualizacao" required="1">
+                        <option value="diario">Diario</option>
+                        <option value="semanal">Semanal</option>
+                        <option value="mensal">Mensal</option>
+                        <option value="semestral">Semestral</option>
+                        <option value="anual">Anual</option>
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <label>Dia:</label>
+                     <select class="form-control" name="dia_atualizacao" required="1">
+                     {% for day in range(1, 32) %}
+                        <option value="{{ day }}">{{ day }}</option>
+                     {% endfor %}
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <label>Database:</label>
+                     <select class="form-control" name="database" required="1">
+                        {% for database in data_conn %}
+                           <option value="{{ database[0] }}">{{ database[5] }}</option>
+                        {% endfor %}
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <label>Schema:</label>
+                     <input type="text" class="form-control" name="schema" required="1">
+                  </div>
+                  <div class="form-group">
+                     <label>Tabela:</label>
+                     <input type="text" class="form-control" name="table" required="1">
+                  </div>
+                  <div class="form-group">
+                     <label>Tipo de atualização</label>
+                     <select class="form-control" name="tipo_atualizacao" required="1">
+                        <option value="1">Simples</option>
+                        <option value="2">Com concatenação</option>
+                     </select>
+                  </div>
+                  <div class="form-group text-center">
+                     <input type="checkbox" name="atualizacao_automatica" value="1">
+                     Atualização automática.
+                  </div>               
+                  <div class="form-group text-center">
+                     <input type="checkbox" name="metadata" value="1">
+                     Criar os metadados ao adicionar.
+                  </div>
+                  <div class="form-group text-center">
+                     <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Adicionar</button>
+                     <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                  </div>
+               </form>
+            </div>
+            </div>
+         </div>
+      </div>
+       <!-- Fim formulário de nova conexão-->
+
+   
+  
+{% endblock %}
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>

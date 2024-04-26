@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col md-12 text-center">
+            <div class="p-4">
+                <h2>Ferramenta de pré-processamento de dados</h2>
+                <p class="p-4">Bem vindo! Essa ferramenta auxilia nas atividades de dados abertos!</p>
+            </div>
+            <div>
+                <p><h4>O que você gostaria de fazer?</h4></p>
+                <table class="table">
+                    <tr>
+                        <td class="w-25"><a href="{{ url_for('conexao.index') }}" style="height: 75px" class="btn btn-outline-primary btn-lg btn-block" title="Gerencie conexões com o banco de dados que serão utilizados para extração de dados"><span class="glyphicon glyphicon-tasks"></span> Conexões</th>
+                        <td class="w-25"><a href="{{ url_for('conjunto_dados.index') }}" style="height: 75px" class="btn btn-outline-secondary btn-lg btn-block" title="Gerencie conjuntos de dados que serão atualizados no seu portal de dados abertos"><span class="glyphicon glyphicon-list-alt"></span> Conjuntos de dados</th>
+                        <td class="w-25"><a href="{{ url_for('concatenar_tabela.index') }}" style="height: 75px" class="btn btn-outline-success btn-lg btn-block" title="Concatene dois arquivos no formato CSV"><span class="glyphicon glyphicon-th-large"></span> Concatenar tabelas</th>
+                        <td class="w-25"><a href="{{ url_for('conversor.index') }}" style="height: 75px" class="btn btn-outline-danger btn-lg btn-block" title="Converta um documento no formato PDF para o formato TXT"><span class="glyphicon glyphicon-font"></span> Conversor de documentos</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

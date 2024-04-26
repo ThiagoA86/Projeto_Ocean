@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+        />
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+        
+        <!--<link rel="stylesheet" href="../static/css/style_conversor.css">-->
+        
+        <title>{% block title %} Pré-processamento - Login {% endblock %}</title>
+        
+    </head>
+    <body>
+        <div class="p-4 text-center">
+            <h2>Ferramenta de pré-processamento de dados</h2>
+            <p class="p-4 text-center">Bem vindo! Essa ferramenta auxilia nas atividades de dados abertos!</p>
+            
+        </div>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+        
+        <!-- Para páginas de conexões e conjuntos de dados-->
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+        <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <!--<script type="text/javascript" src="{{ url_for('static', filename='js/menu.js') }}"></script>-->
+
+        <!-- para páginas de concatenação de tabelas-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+                $('#loginBtn').click(function(e) {
+                    e.preventDefault();
+                    var email = $('#email').val();
+                    var password = $('#password').val();
+                    if(email && password) {
+                        alert('Login efetuado com sucesso!');
+                    } else {
+                        alert('Por favor, preencha todos os campos.');
+                    }
+                });
+            });
+
+            
+             
+            $(document).ready(function() {
+                //Validar senha
+                $('#novasenha').blur('input',function() {
+                    
+                    var password = $('#novasenha').val();
+                    
+                    // Verifica se a senha atende aos critérios
+                    if (password.length >= 8 && /[0-9]/.test(password) && /[a-z]/.test(password) && /[A-Z]/.test(password) && /[!@#$%^&*()_+{}[\]:;<>,.?~]/.test(password)) {
+                        $('#password-message').text('Senha aceita!');
+                        $('#novasenha').css('background-color', 'rgba(204, 255, 204, 0.8)');
+                        $('#salvar').prop('disabled',true);
+                         
+                        // Validação de senha repetida
+                        $('#senharepetir').keyup('input',function() {
+                    
+                            const password = $('#novasenha').val();
+                            const confirmPassword = $(this).val();
+                
+                            if (password == confirmPassword) {
+                                $('#password-match-message').text('As senhas coincidem.').css('color', 'green');
+                                $('#senharepetir').css('background-color', 'rgba(204, 255, 204, 0.8)');
+                                $('#salvar').prop('disabled',false);
+                                } else {
+                                    $('#password-match-message').text('As senhas não coincidem.').css('color', 'red');
+                                    $('#senharepetir').css('background-color', 'rgba(255, 99, 71, 0.5)');
+                                    $('#salvar').prop('disabled',true);
+                                }
+                        });
+                    } else {
+                        $('#password-message').text('Minimo 8 caracteres, com simbolos, numero e letras: maiúsculas e minúsculas');
+                        alert('A senha não atende aos critérios. Por favor, tente novamente.');
+                        $('#novasenha').css('background-color', 'rgba(255, 99, 71, 0.5)');
+                        $('#salvar').prop('disabled',true);
+                    }
+                });
+            });
+           
+            
+        </script>
+        
+        
+    </body>
+</html>

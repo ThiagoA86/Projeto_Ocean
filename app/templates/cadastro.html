@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <!-- Inclua os arquivos do Bootstrap e jQuery -->
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Cadastro de Usuário</h2>
+        <!-- Botão para abrir a janela modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
+            Cadastrar
+        </button>
+
+        <!-- Janela modal -->
+        <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Formulário de Cadastro</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Seu formulário aqui -->
+                        <form id="cadastroForm">
+                            <!-- Campos de cadastro (nome, sobrenome, e-mail, senha, setor) -->
+                            <!-- Exemplo: -->
+                            <div class="form-group">
+                                <label for="nome">Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required>
+                            </div>
+                            <!-- ... outros campos ... -->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" onclick="submeterFormulario()">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script para enviar o formulário via AJAX -->
+        <script>
+            function submeterFormulario() {
+                // Aqui você pode fazer uma requisição AJAX para enviar os dados ao servidor
+                // Exemplo: $.post("seu_endpoint.php", $("#cadastroForm").serialize(), function(response) { ... });
+                // Após salvar no banco de dados, exiba uma mensagem de sucesso ou erro.
+                // Feche a janela modal se necessário.
+            }
+        </script>
+    </div>
+</body>
+</html>

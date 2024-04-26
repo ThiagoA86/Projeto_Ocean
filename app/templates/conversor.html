@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %} Conversor PDF para TXT {% endblock %}
+{% block content %}
+
+
+
+<link rel="stylesheet" href="../static/css/style_conversor.css">
+<div class="container">
+    <div class="form-container">
+        <h2>Conversor de documentos </h2>
+        <hr>
+        <!--Metodo Conversor App.py-->
+        <form action="{{url_for('conversor.converter_file')}}"  method="POST" enctype='multipart/form-data'>
+            <h4> Selecione um arquivo PDF: <input type="file" name="arquivo"  required> </h4>           
+             <input type="submit" value="Converter">            
+        </form>
+    </div>
+</div>
+
+{% endblock %}

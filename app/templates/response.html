@@ -1,0 +1,19 @@
+<!-- Essa página retorna as mensagens de respostas a uma determinada ação-->
+<p>
+    <!-- Exibe mensagem de erro -->
+    {% if msg_erro %}
+    <b style="color:red">{{ msg_erro }}</b>
+    {% endif %}
+
+    <!-- Exibe mensagem de sucesso -->
+    {% if msg_sucesso %}
+        <b style="color:green">{{ msg_sucesso }}</b>
+    {% endif %}
+
+    <!-- Disponibiliza o link de download ( caso haja ) -->
+    {% if arquivo_concatenado %}
+    <p>
+        <a class="btn btn-info" href="{{url_for('concatenar_tabela.download_file', file=arquivo_concatenado)}}">Download</a>
+    </p>
+    {% endif %}
+</p>
