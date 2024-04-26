@@ -76,8 +76,6 @@ def create_app(config_class=Config):
     from app.conjunto_dados import bp as conjunto_dados_bp
     app.register_blueprint(conjunto_dados_bp,url_prefix='/conjunto_dados')
 
-    @app.route('/test/')
-    def test_page():
-        return '<h1>Testando Flask</h1>'
+   
 
     return app
