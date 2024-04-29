@@ -1,0 +1,39 @@
+
+git init - Inicia o repositorio
+
+gitignore: Arquivo para ser criado no git e evitar que determinados arquivos sejam adicionaos.
+Ou seja, o git vai ignorar os arquivos que estuverem dentro dele. 
+
+git status - Ver os arquivos que faltam commit
+git remote add origin + endereço da pasta no github: Esse comando permite apontar para o repositório no github.
+git clone + endereço da pasta no github: Esse comando serve para clonar um projeto no github.
+git add = adiciona os arquivos para Commit
+git commit -m"contaúdo da mensagem de commit": Gravação de arquivo no git. Esse comando serve para commitar os arquivos no git.
+git log: Comando para visualizar os logs dos arquivos gravados no repositório. 
+
+
+git branch: Comando para listar as branchs existentes.
+git branch novo_branch: Comando para criar um novo branch.
+git checkout novo_branch: Comando para mudar de branch.
+git checkout -b nova_branch: Comando cria uma nova branch e troca para ela ao mesmo tempo.
+git push origin "Main e as Branch" - PC para Servidor.
+git pull origin "Main e as Branch" - Servidor para PC.
+
+
+
+
+git rm nomedoarquivo: Esse comando serve para remover/deletar um arquivo do repositório. Todo arquivo removido precisa ser
+git mv nomeantigo nome_novo: O comando "mv" altera o nome de um arquivo. Ou seja, renomeia o arquivo existente, exemplo:
+git checkout -- nomedoarquivo: Esse comando permite desfazer uma alteração em um determinado arquivo
+git checkout -- arquivo.txt
+git reset --hard
+
+
+
+
+
+git branch -d nova_branch: Comando deleta um branch criada.
+git branch -D nova_branch: O comando usando o "-D" (letra maiúscula) é usando quando existe commit na branch.
+git branch --no-merged: Comando para identificar se existe alguma branch não mesclada.
+git merge nova_branch -m"Mensagem sobre a mesclagem da branch.": Esse comando mescla a nova_branch ao master.
+git push origin --delete "branch".
