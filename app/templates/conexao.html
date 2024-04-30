@@ -3,6 +3,7 @@
 {% block content %}
 <!--<link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">-->
 <div class="container">
+    
     <div class="row">
         <div class="col md-12">
             <div class="p-4">
@@ -85,36 +86,36 @@
                                 <!--Metodo Update da App Icone de Lapis-->
                                 <!--"-->
                                 <form action="{{url_for('conexao.update', id=row[0])}}"  method="POST">
+                                    {{ formulario.csrf_token }}
                                     <div class="form-group">
-                                        <label>Driver:</label>
-                                        <select class="form-control" name="driver" required="1">
-                                            <option value="oracle" selected="selected" >Oracle</option>
-                                            <option value="postgresql">PostgreSQL</option>
-                                        </select>
+                                                                              
+                                         {{formulario.driver.label}}
+                                         {{formulario.driver(value=row[2],class="form-control")}}
                                     </div>
                                     <div class="form-group">
-                                        <label>Nome da Conexão</label>
-                                        <input type="text" class="form-control" name="nome_conexao" value="{{ row[1]}}" required="1">
+                                        {{formulario.nome_conexao.label}}
+                                        {{formulario.nome_conexao(value=row[1],class="form-control")}}    
+                                        
                                     </div>
                                     <div class="form-group">
-                                        <label>Host</label>
-                                        <input type="text" class="form-control" name="host" value="{{ row[3] }}" required="1">
+                                        {{formulario.host.label}}
+                                        {{formulario.host(value=row[3],class="form-control")}}
                                     </div>
                                     <div class="form-group">
-                                        <label>Porta:</label>
-                                        <input type="text" class="form-control" name="porta" value="{{ row[4] }}" required="1">
+                                        {{formulario.porta.label}}
+                                        {{formulario.porta(value=row[4],class="form-control")}}
                                     </div>
                                     <div class="form-group">
-                                        <label>Database:</label>
-                                        <input type="text" class="form-control" name="database" value="{{ row[5] }}" required="1">
+                                        {{formulario.database.label}}
+                                        {{formulario.database(value=row[5],class="form-control")}}
                                     </div>
                                     <div class="form-group">
-                                        <label>username:</label>
-                                        <input type="text" class="form-control" name="username" value="{{ row[6] }}" required="1">
+                                        {{formulario.username.label}}
+                                        {{formulario.username(value=row[6],class="form-control")}}
                                     </div>
                                     <div class="form-group">
-                                        <label>password:</label>
-                                        <input type="password" class="form-control" name="password" value="{{ row[7] }}" required="1">
+                                        {{formulario.password.label}}
+                                        {{formulario.password(value=row[7],class="form-control")}}
                                     </div>
                                     <div class="form-group text-center">
                                         <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Atualizar</button>
@@ -165,36 +166,34 @@
                     <div class="modal-body">
                         <!--Metodo insert de App--> 
                         <form action="{{url_for('conexao.insert')}}" method="POST">
+                            {{ formulario.csrf_token }} 
                             <div class="form-group">
-                                <label>Driver:</label>
-                                <select class="form-control" name="driver" required="1">
-                                    <option value="oracle" selected="selected" >Oracle</option>
-                                    <option value="postgresql">PostgreSQL</option>
-                                </select>
+                                {{formulario.driver.label}}
+                                {{formulario.driver(class="form-control")}}
                             </div>
                             <div class="form-group">
-                                <label>Nome da Conexão</label>
-                                <input type="text" class="form-control" name="nome_conexao" value="" required="1">
+                                {{formulario.nome_conexao.label}}
+                                {{formulario.nome_conexao(class="form-control")}}
                             </div>
                             <div class="form-group">
-                                <label>Host</label>
-                                <input type="text" class="form-control" name="host" required="1">
+                                {{formulario.host.label}}
+                                {{formulario.host(class="form-control")}}
                             </div>
                             <div class="form-group">
-                                <label>Porta:</label>
-                                <input type="text" class="form-control" name="porta" required="1">
+                                {{formulario.porta.label}}
+                                {{formulario.porta(class="form-control")}}
                             </div>
                             <div class="form-group">
-                                <label>Database:</label>
-                                <input type="text" class="form-control" name="database" required="1">
+                                {{formulario.database.label}}
+                                {{formulario.database(class="form-control")}}
                             </div>
                             <div class="form-group">
-                                <label>username:</label>
-                                <input type="text" class="form-control" name="username" required="1">
+                                {{formulario.username.label}}
+                                {{formulario.username(class="form-control")}}
                             </div>
                             <div class="form-group">
-                                <label>password:</label>
-                                <input type="password" class="form-control" name="password" required="1">
+                                {{formulario.password.label}}
+                                {{formulario.password(class="form-control")}}
                             </div>
                             <div class="form-group text-center">
                                 <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
