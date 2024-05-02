@@ -10,7 +10,7 @@ from werkzeug.security import generate_password_hash
 #################  CLASS FORMULARIO  ###################
 ########################################################
 
-class Form_Flask(FlaskForm):
+class Form_Conexao(FlaskForm):
 
     #Atributos da CONEXAO#
     nome_conexao = StringField('Nome da Conexão', validators=[InputRequired()])
@@ -21,6 +21,17 @@ class Form_Flask(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired()]) 
     driver = SelectField('Driver', choices=[('oracle', 'Oracle'), ('postgresql', 'PostgreSQL')]) 
 
+class Form_Conjunto_de_dados(FlaskForm):
     #Atributos da CONJUNTO DE DADOS#
-
+    titulo = StringField('Título:', validators=[InputRequired()])
+    freq_atualizacao = SelectField('Frequência de atualização:', choices=[('diario', 'Diario'),('semanal', 'Semanal'), 
+                                                      ('mensal', 'Mensal'),
+                                                      ('semestral', 'Semestral'),('anual', 'Anual')])
+    dia_atualizacao=SelectField('Dia:', choices=[(str(i), str(i)) for i in range(1, 32)])
+    schema = StringField('Schema:', validators=[InputRequired()])
+    tabela = StringField('Tabela:', validators=[InputRequired()])
+    tipo_atualizacao = SelectField('Tipo de atualização:', choices=[('simples', 'Simples'), ('com concatenação', 'Com concatenação')]) 
+    atualizacao_automatica = BooleanField('Atualização automática.')
+    criar_metadados =BooleanField('Criar os metadados ao adicionar.')
+    ultima_atu= StringField('Última atualização:')
     #Atributos do LOGIN#

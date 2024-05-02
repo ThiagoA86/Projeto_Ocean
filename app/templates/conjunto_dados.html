@@ -95,29 +95,18 @@
                         <!--Metodo Ds_edit App.py Icone de Lapis-->
                         <form action="{{ url_for('conjunto_dados.ds_edit', id=row[0] )}}" method="POST">
                            <div class="form-group">
-                              <label>Título:</label>
-                              <input type="text" class="form-control" name="titulo" required="1" value='{{ row[2] }}'>
+                              {{formulario.titulo.label}}
+                              {{formulario.titulo(value=row[2],class="form-control")}}
                            </div>
                            <div class="form-group">
                               <label>Frequencia de atualização:</label>
-                              <select class="form-control" name="freq_atualizacao" required="1">
-                                 <option value='{{ row[3] }}'>Selecionado : {{ row[3] }}</option>
-            
-                                 <option value="diario">Diario</option>
-                                 <option value="semanal">Semanal</option>
-                                 <option value="mensal">Mensal</option>
-                                 <option value="semestral">Semestral</option>
-                                 <option value="anual">Anual</option>
-                              </select>
+                              {{formulario.titulo.label}}
+                              {{formulario.titulo(value=row[3],class="form-control")}}
+                              
                            </div>
                            <div class="form-group">
-                              <label>Dia:</label>
-                              <select class="form-control" name="dia_atualizacao" required="1">
-                                 <option value='{{ row[4] }}'>Selecionado : {{ row[4] }}</option>
-                                 {% for day in range(1, 32) %}
-                                 <option value="{{ day }}">{{ day }}</option>
-                                 {% endfor %}
-                              </select>
+                              {{formulario.dia_atualizacao.label}}
+                              {{formulario.dia_atualizacao(value=row[4],class="form-control")}}                           
                            </div>
                            <div class="form-group">
                               <label>Database</label>
@@ -137,32 +126,35 @@
                               </select>                            
                            </div>
                            <div class="form-group">
-                              <label>Schema:</label>
-                              <input type="text" class="form-control" name="schema" required="1" value='{{ row[5] }}'>
+                              {{formulario.schema.label}}
+                              {{formulario.schema(value=row[5],class="form-control")}}
+                             
+                           <div class="form-group">
+                              {{formulario.tabela.label}}
+                              {{formulario.tabela(value=row[6],class="form-control")}}
+                             
                            </div>
                            <div class="form-group">
-                              <label>Tabela:</label>
-                              <input type="text" class="form-control" name="table" required="1" value='{{ row[6] }}'>
+                              {{formulario.ultima_atu.label}}
+                              {{formulario.ultima_atu(value=row[9],class="form-control")}}
+                              
                            </div>
                            <div class="form-group">
-                              <label>Última atualização:</label>
-                              <input type="text" class="form-control" name="ultima_atualizacao" required="1" value='{{ row[9] }}'>
-                           </div>
-                           <div class="form-group">
-                              <label>Tipo de atualização</label>
-                              <select class="form-control" name="tipo_atualizacao" required="1">
-
-                                 
-                                 <option value='{{ row[7] }}' selected>Selecionado : {{ row[7] }}</option>
-                                 <option value="1">Simples</option>
-                                 <option value="2">Com concatenação</option>
-                              </select>
+                              {{formulario.tipo_atualizacao.label}}
+                              {{formulario.tipo_atualizacao(value=row[7],class="form-control")}}                           
                            </div>
                            <div class="form-group text-center">
+                              {% if row[8] == 1 %}
+                              {{formulario.atualizacao_automatica (class="switch")}}
+                              {% else %}
+                              {{formulario.atualizacao_automatica}}
+                              {% endif %}
+                              {{formulario.atualizacao_automatica.label}}
                               <input type="checkbox" name="atualizacao_automatica" value="atualizacao_automatica" {% if row[8] == 1 %}checked{% endif %}>
                               Atualização automática.
                            </div>               
                            <div class="form-group text-center">
+                              {{formulario.criar_metadados(default="True")}} {{formulario.criar_metadados.label}}
                               <input type="checkbox" name="metadata" value="1" {% if row[10] == 1 %}checked{% endif %}>
                               Criar os metadados ao adicionar.
                            </div>
@@ -229,27 +221,18 @@
                <!--Metodo Ds_insert App.py-->
                <!--action=""-->
                <form action="{{url_for('conjunto_dados.ds_insert')}}" method="POST">
+                  {{ formulario.csrf_token }}
                   <div class="form-group">
-                     <label>Título:</label>
-                     <input type="text" class="form-control" name="titulo" required="1">
+                     {{formulario.titulo.label}}
+                     {{formulario.titulo(class="form-control")}}
                   </div>
                   <div class="form-group">
-                     <label>Frequencia de atualização:</label>
-                     <select class="form-control" name="freq_atualizacao" required="1">
-                        <option value="diario">Diario</option>
-                        <option value="semanal">Semanal</option>
-                        <option value="mensal">Mensal</option>
-                        <option value="semestral">Semestral</option>
-                        <option value="anual">Anual</option>
-                     </select>
+                     {{formulario.freq_atualizacao.label}}
+                     {{formulario.freq_atualizacao(class="form-control")}}
                   </div>
                   <div class="form-group">
-                     <label>Dia:</label>
-                     <select class="form-control" name="dia_atualizacao" required="1">
-                     {% for day in range(1, 32) %}
-                        <option value="{{ day }}">{{ day }}</option>
-                     {% endfor %}
-                     </select>
+                     {{formulario.dia_atualizacao.label}}
+                     {{formulario.dia_atualizacao(class="form-control")}}
                   </div>
                   <div class="form-group">
                      <label>Database:</label>
@@ -260,27 +243,22 @@
                      </select>
                   </div>
                   <div class="form-group">
-                     <label>Schema:</label>
-                     <input type="text" class="form-control" name="schema" required="1">
+                     {{formulario.schema.label}}
+                     {{formulario.schema(class="form-control")}}
                   </div>
                   <div class="form-group">
-                     <label>Tabela:</label>
-                     <input type="text" class="form-control" name="table" required="1">
+                     {{formulario.tabela.label}}
+                     {{formulario.tabela(class="form-control")}}
                   </div>
                   <div class="form-group">
-                     <label>Tipo de atualização</label>
-                     <select class="form-control" name="tipo_atualizacao" required="1">
-                        <option value="1">Simples</option>
-                        <option value="2">Com concatenação</option>
-                     </select>
+                     {{formulario.tipo_atualizacao.label}}
+                     {{formulario.tipo_atualizacao(class="form-control")}}
                   </div>
-                  <div class="form-group text-center">
-                     <input type="checkbox" name="atualizacao_automatica" value="1">
-                     Atualização automática.
+                  <div class="form-group text-center">                    
+                     {{formulario.atualizacao_automatica}} {{formulario.atualizacao_automatica.label}}
                   </div>               
-                  <div class="form-group text-center">
-                     <input type="checkbox" name="metadata" value="1">
-                     Criar os metadados ao adicionar.
+                  <div class="form-group text-center">                     
+                     {{formulario.criar_metadados}} {{formulario.criar_metadados.label}}
                   </div>
                   <div class="form-group text-center">
                      <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Adicionar</button>
