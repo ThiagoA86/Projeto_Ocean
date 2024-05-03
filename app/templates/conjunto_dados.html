@@ -145,18 +145,20 @@
                            </div>
                            <div class="form-group text-center">
                               {% if row[8] == 1 %}
-                              {{formulario.atualizacao_automatica (class="switch")}}
-                              {% else %}
-                              {{formulario.atualizacao_automatica}}
+                              {{formulario.atualizacao_automatica (checked='True')}}
+                              {%else%}
+                              {{formulario.atualizacao_automatica ()}}
                               {% endif %}
                               {{formulario.atualizacao_automatica.label}}
-                              <input type="checkbox" name="atualizacao_automatica" value="atualizacao_automatica" {% if row[8] == 1 %}checked{% endif %}>
-                              Atualização automática.
+                              
                            </div>               
                            <div class="form-group text-center">
-                              {{formulario.criar_metadados(default="True")}} {{formulario.criar_metadados.label}}
-                              <input type="checkbox" name="metadata" value="1" {% if row[10] == 1 %}checked{% endif %}>
-                              Criar os metadados ao adicionar.
+                              {% if row[10] == 1 %}
+                              {{formulario.criar_metadados (checked='True')}}
+                              {%else%}
+                              {{formulario.criar_metadados}}
+                              {% endif %}
+                              {{formulario.criar_metadados.label}}
                            </div>
                            <div class="form-group text-center">
                               <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Salvar</button>

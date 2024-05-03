@@ -48,24 +48,26 @@ def ds_insert():
 # Funcionalidade de editar informações do conjunto de dados já salvo, passado pelo formulario da Conjunto_dados.html
 @bp.route('/ds_edit/<string:id>',methods=('GET','POST'))
 def ds_edit(id):
+    #Instânciando a Classe Formulario para usar na função. 
+    formulario = Form_Conjunto_de_dados()
     if request.method == 'POST':
-        new_titulo = request.form['titulo']
+        new_titulo = formulario.titulo.data
         if new_titulo == '':
             flash("O nome do conjunto de dados não pode ficar vazio!", 'error')
             return(redirect(url_for('conjunto_dados.index')))
         else:
             try:
                 conn_id = request.form['database']
-                titulo = request.form['titulo']
-                freq_atualizacao = request.form['freq_atualizacao']
-                dia = request.form['dia_atualizacao']
-                schema = request.form['schema']
+                titulo = formulario.titulo.data
+                freq_atualizacao = formulario.freq_atualizacao.data
+                dia = formulario.dia_atualizacao.data
+                schema = formulario.schema.data
                 database = request.form['database']
-                table = request.form['table']
-                tipo_atualizacao = request.form['tipo_atualizacao']
+                table = formulario.tabela.data
+                tipo_atualizacao = formulario.tipo_atualizacao.data
                 ultima_atualizacao = str(date.today())
-                atualizacao_automatica = True if request.form.get('atualizacao_automatica') else False
-                criar_metadados = True if request.form.get('metadata') else False
+                atualizacao_automatica = formulario.atualizacao_automatica.data
+                criar_metadados = formulario.criar_metadados.data
                 #Recebe ID e passa para o metodo edit_dataset da Libs Dataset.py
                 Dataset.edit_dataset(id, conn_id, titulo, freq_atualizacao, dia, schema, database, table, tipo_atualizacao, ultima_atualizacao, atualizacao_automatica, criar_metadados)
             except Exception as e:
