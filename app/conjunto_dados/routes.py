@@ -69,6 +69,7 @@ def ds_edit(id):
                 atualizacao_automatica = formulario.atualizacao_automatica.data
                 criar_metadados = formulario.criar_metadados.data
                 #Recebe ID e passa para o metodo edit_dataset da Libs Dataset.py
+               
                 Dataset.edit_dataset(id, conn_id, titulo, freq_atualizacao, dia, schema, database, table, tipo_atualizacao, ultima_atualizacao, atualizacao_automatica, criar_metadados)
             except Exception as e:
                 flash('Não foi possível salvar as informações atualizadas do conjunto de dados: {}'.format(e), 'error')
