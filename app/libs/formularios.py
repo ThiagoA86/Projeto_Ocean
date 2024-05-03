@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField 
-from wtforms import DecimalField, RadioField, SelectField, TextAreaField, FileField 
+from wtforms import DecimalField, RadioField, SelectField, TextAreaField,FileField 
 from wtforms.validators import DataRequired, InputRequired, Length
+from flask_wtf.file import FileAllowed, FileRequired
 from werkzeug.security import generate_password_hash 
 
 
@@ -34,4 +35,7 @@ class Form_Conjunto_de_dados(FlaskForm):
     atualizacao_automatica = BooleanField('Atualização automática.')
     criar_metadados =BooleanField('Criar os metadados ao adicionar.')
     ultima_atu= StringField('Última atualização:')
+class Form_Conversor(FlaskForm):     
+     #Atributos do CONVERSOR#
+    arquivo = FileField('Selecione um arquivo PDF:',validators=[FileRequired(),FileAllowed(['pdf'],'Apenas arquivos PDF são permitidos.')])
     #Atributos do LOGIN#

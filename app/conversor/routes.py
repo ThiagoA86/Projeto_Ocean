@@ -4,9 +4,11 @@ import platform
 import subprocess
 import os
 import shutil
+from app.libs.formularios import Form_Conversor
 
 @bp.route('/')
 def index():
+     formulario=Form_Conversor()
      if not os.path.exists('app/files'):
         os.makedirs('app/files/pdf')
         os.makedirs('app/files/txt')
@@ -20,7 +22,7 @@ def index():
             pass
        
             
-     return render_template('conversor.html')
+     return render_template('conversor.html',formulario=formulario)
 
 
 
@@ -28,17 +30,18 @@ def index():
 def converter_file():
     # Salva o sistema operacional em que o aplicativo está sendo executado
     sist_op = platform.system()
-
+    formulario=Form_Conversor()
     # Atribuindo o caminho do pdf e do conversor conforme o sistema operacional detectado ( Windows ou Linux )
     pdf_path = "app\\files\\pdf\\" if sist_op == 'Windows' else "app//files//pdf//"
     txt_path = "app\\files\\txt\\" if sist_op == 'Windows' else "app//files//txt//"
     bin_path = "app\\bin\\windows\\" if sist_op == "Windows" else "app//bin//linux//"
-
-    # recupera o arquivo enviado no request usando o post
-    arquivo = request.files['arquivo']
-
+    if formulario.validate_on_submit():
+      # recupera o arquivo enviado no request usando o post
+      print(f' Validação {formulario.arquivo.data} {formulario.arquivo.errors}')
+    arquivo = formulario.arquivo.data
+    #arquivo = request.files['arquivo']
     #salva o nome do arquivo na variável filename
-    filename = arquivo.filename
+    filename = formulario.arquivo.data.filename
 
     # Salva o arquivo no sistema de arquivos
     arquivo.save(filename)

@@ -11,9 +11,16 @@
         <hr>
         <!--Metodo Conversor App.py-->
         <form action="{{url_for('conversor.converter_file')}}"  method="POST" enctype='multipart/form-data'>
-            <h4> Selecione um arquivo PDF: <input type="file" name="arquivo"  required> </h4>           
+            <h4> {{ formulario.arquivo.label() }} {{formulario.arquivo}} </h4>           
              <input type="submit" value="Converter">            
         </form>
+        {% if formulario.arquivo.errors %}
+                <div class="invalid-feedback">
+                    {% for error in formulario.arquivo.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
     </div>
 </div>
 
