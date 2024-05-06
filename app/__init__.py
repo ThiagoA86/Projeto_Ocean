@@ -2,6 +2,9 @@ from flask import Flask
 
 from config import Config
 import sqlite3
+from flask_wtf.csrf import CSRFProtect
+
+csrf = CSRFProtect()
 
 
 
@@ -13,7 +16,7 @@ def create_app(config_class=Config):
     app.debug=True
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-    
+    csrf.init_app(app)
     # Initialize Flask extensions here
 
     #from app.libs.connection import Connection

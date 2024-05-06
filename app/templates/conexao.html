@@ -86,7 +86,7 @@
                                 <!--Metodo Update da App Icone de Lapis-->
                                 <!--"-->
                                 <form action="{{url_for('conexao.update', id=row[0])}}"  method="POST">
-                                    {{ formulario.csrf_token }}
+                                   
                                     <div class="form-group">
                                                                               
                                          {{formulario.driver.label}}
@@ -139,7 +139,8 @@
                             </div>
                             <div class="modal-body text-center">
                                <!--Metodo Delete de App.py--> 
-                                <form action="{{url_for('conexao.delete', id=row[0])}}"   method="POST"> 
+                                <form action="{{url_for('conexao.delete', id=row[0])}}"   method="POST">
+                                    
                                     <label>Tem certeza de que deseja remover a conexão "{{ row[1] }}" ? Essa ação é irreversível.</label>
                                     <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Remover</button>
                                     <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
@@ -166,7 +167,7 @@
                     <div class="modal-body">
                         <!--Metodo insert de App--> 
                         <form action="{{url_for('conexao.insert')}}" method="POST">
-                            {{ formulario.csrf_token }} 
+                             
                             <div class="form-group">
                                 {{formulario.driver.label}}
                                 {{formulario.driver(class="form-control")}}

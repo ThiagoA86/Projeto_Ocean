@@ -38,4 +38,9 @@ class Form_Conjunto_de_dados(FlaskForm):
 class Form_Conversor(FlaskForm):     
      #Atributos do CONVERSOR#
     arquivo = FileField('Selecione um arquivo PDF:',validators=[FileRequired(),FileAllowed(['pdf'],'Apenas arquivos PDF são permitidos.')])
+    
+class Form_Concatenar(FlaskForm):     
+     #Atributos do CONTENARR#
+    arquivo1 = FileField('Arquivo 1:',validators=[FileRequired(),FileAllowed(['csv'],'Apenas arquivos CSV são permitidos.')])
+    arquivo2 = FileField('Arquivo 2:',validators=[FileRequired(),FileAllowed(['csv'],'Apenas arquivos CSV são permitidos.')])
     #Atributos do LOGIN#

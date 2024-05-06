@@ -3,6 +3,7 @@ from flask import render_template, request, send_file,jsonify
 from app.libs.data import Data
 import os
 from werkzeug.utils import secure_filename
+from app.libs.formularios import Form_Concatenar
 
 UPLOAD_FOLDER = 'app\\temp\\files\\'
 ALLOWED_EXTENSIONS = set(['csv'])
@@ -10,18 +11,23 @@ def allowed_file(filename):
      return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 @bp.route('/')
 def index():
-     return render_template('concatenar_tabela.html')
+     formulario = Form_Concatenar()
+     return render_template('concatenar_tabela.html',formulario=formulario)
 
 
 # Página de funcionalidade de concatenação de tabelas do formulario /upload
 @bp.route('/upload', methods=('GET','POST'))
 def upload():
+    formulario = Form_Concatenar()
+    if formulario.validate_on_submit():
+      # recupera o arquivo enviado no request usando o post
+      print(f' Validação Oi Oi Ola')
     # Salvando arquivo 1
-    file_1 = request.files['file1']
+    file_1 = formulario.arquivo1.data
     savePath_1 = os.path.join(UPLOAD_FOLDER, secure_filename(file_1.filename))
 
     # Salvando arquivo 2
-    file_2 = request.files['file2']
+    file_2 = formulario.arquivo2.data
     savePath_2 = os.path.join(UPLOAD_FOLDER, secure_filename(file_2.filename))
 
     try:

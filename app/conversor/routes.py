@@ -37,7 +37,7 @@ def converter_file():
     bin_path = "app\\bin\\windows\\" if sist_op == "Windows" else "app//bin//linux//"
     if formulario.validate_on_submit():
       # recupera o arquivo enviado no request usando o post
-      print(f' Validação {formulario.arquivo.data} {formulario.arquivo.errors}')
+      print(f' Validação Oi Oi Ola')
     arquivo = formulario.arquivo.data
     #arquivo = request.files['arquivo']
     #salva o nome do arquivo na variável filename

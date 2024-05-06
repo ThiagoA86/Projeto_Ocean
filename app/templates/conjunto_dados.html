@@ -94,6 +94,7 @@
                      <div class="modal-body">
                         <!--Metodo Ds_edit App.py Icone de Lapis-->
                         <form action="{{ url_for('conjunto_dados.ds_edit', id=row[0] )}}" method="POST">
+                           {{ formulario.hidden_tag() }}
                            <div class="form-group">
                               {{formulario.titulo.label}}
                               {{formulario.titulo(value=row[2],class="form-control")}}
@@ -169,6 +170,7 @@
                   </div>
                </div>
             </div>
+         </div>
             <!--Fim da Edição do conjunto de dados-->
             <!-- Formulário de atualização do conjunto de dados-->
             <div id="modalUpdate{{ row[0] }}" class="modal fade" role="dialog">
@@ -177,6 +179,7 @@
                      <div class="modal-body text-center">
                            <!--Metodo Ds_update App.py Icone de Nuvem-->
                            <form action="{{ url_for('conjunto_dados.ds_update', id=row[0]) }}" method="POST">
+                              {{ formulario.hidden_tag() }}
                               <label>Deseja atualizar o conjunto de dados "{{ row[2] }}" ?</label><br>
                               <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Atualizar</button>
                               <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
@@ -185,6 +188,7 @@
                   </div>
                </div>
             </div>
+         
             <!--Fim da atualização do conjunto de dados-->
             <!-- Formulário de remoção do conjunto de dados-->
             <div id="modalDelete{{ row[0] }}" class="modal fade" role="dialog">
@@ -197,6 +201,7 @@
                        <div class="modal-body text-center">
                            <!--Metodo Ds_delete App.py Icone de Lixeira-->
                            <form action="{{ url_for('conjunto_dados.ds_delete', id=row[0]) }}" method="POST">
+                              {{ formulario.hidden_tag() }}
                                <label>Tem certeza de que deseja remover o conjunto de dados "{{ row[2] }}" ? Essa ação é irreversível.</label>
                                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Remover</button>
                                <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>

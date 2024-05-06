@@ -16,10 +16,11 @@
             <!-- FORMULÁRIO DE ENVIO DE ARQUIVOS -->
             <!--<form id="uploadImage" action="/upload" enctype="multipart/form-data" method="post">-->
             <form id="uploadImage" action="{{url_for('concatenar_tabela.upload')}}" enctype="multipart/form-data" method="POST">
+                {{ formulario.hidden_tag() }}
                 <table class="table">
                     <tr>
-                        <td style="width: 50%">Arquivo 1<input type="file" class="filestyle" name="file1" id="file1"></td>
-                        <td style="width: 50%">Arquivo 2<input type="file" class="filestyle" name="file2" id="file2"></td>
+                        <td style="width: 50%">{{formulario.arquivo1.label}}{{formulario.arquivo1(class="filestyle",id="file1")}}</td>
+                        <td style="width: 50%">{{formulario.arquivo2.label}}{{formulario.arquivo2(class="filestyle",id="file2")}}</td>
                     </tr>
                 </table>
 
