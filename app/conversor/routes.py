@@ -35,8 +35,8 @@ def converter_file():
     pdf_path = "app\\files\\pdf\\" if sist_op == 'Windows' else "app//files//pdf//"
     txt_path = "app\\files\\txt\\" if sist_op == 'Windows' else "app//files//txt//"
     bin_path = "app\\bin\\windows\\" if sist_op == "Windows" else "app//bin//linux//"
-    if formulario.validate_on_submit():
-      # recupera o arquivo enviado no request usando o post
+    if formulario.validate():
+            # recupera o arquivo enviado no request usando o post
       print(f' Validação Oi Oi Ola')
     arquivo = formulario.arquivo.data
     #arquivo = request.files['arquivo']

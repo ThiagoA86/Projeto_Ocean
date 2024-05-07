@@ -69,12 +69,12 @@
                     <td class="text-center">{{ row[3] }}</td><!-- Host -->
                     <td class="text-center">{{ row[4] }}</td><!-- Porta -->
                     <td class="text-center">{{ row[5] }}</td><!-- Database -->
-                    <td class="text-center">
+                    <td class="text-center" class="col md-10">
                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{ row[0] }}" title="Editar conexão"><span class="glyphicon glyphicon-pencil"></span></button>
                         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modaldelete{{ row[0] }}" title="Remover conexão"><span class="glyphicon glyphicon-trash"></span></button>
                     </td>
                 </tr>
-                <!--Inicio da Edição da Conexão-->
+                  <!--Inicio da Edição da Conexão-->
                 <div id="modaledit{{ row[0] }}" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -86,16 +86,14 @@
                                 <!--Metodo Update da App Icone de Lapis-->
                                 <!--"-->
                                 <form action="{{url_for('conexao.update', id=row[0])}}"  method="POST">
-                                   
+                                    {{ formulario.hidden_tag() }}    
                                     <div class="form-group">
-                                                                              
-                                         {{formulario.driver.label}}
-                                         {{formulario.driver(value=row[2],class="form-control")}}
+                                        {{formulario.driver.label}}
+                                        {{formulario.driver(value=row[2],class="form-control")}}
                                     </div>
                                     <div class="form-group">
                                         {{formulario.nome_conexao.label}}
-                                        {{formulario.nome_conexao(value=row[1],class="form-control")}}    
-                                        
+                                        {{formulario.nome_conexao(value=row[1],class="form-control")}}
                                     </div>
                                     <div class="form-group">
                                         {{formulario.host.label}}
@@ -140,7 +138,7 @@
                             <div class="modal-body text-center">
                                <!--Metodo Delete de App.py--> 
                                 <form action="{{url_for('conexao.delete', id=row[0])}}"   method="POST">
-                                    
+                                    {{ formulario.hidden_tag() }} 
                                     <label>Tem certeza de que deseja remover a conexão "{{ row[1] }}" ? Essa ação é irreversível.</label>
                                     <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Remover</button>
                                     <button class="btn btn-danger" type="submit" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
@@ -153,6 +151,7 @@
                 {% endfor %}
             </table>
         </div>
+                
 
 
         <!-- Modal -->
@@ -167,7 +166,7 @@
                     <div class="modal-body">
                         <!--Metodo insert de App--> 
                         <form action="{{url_for('conexao.insert')}}" method="POST">
-                             
+                            {{ formulario.hidden_tag() }}
                             <div class="form-group">
                                 {{formulario.driver.label}}
                                 {{formulario.driver(class="form-control")}}
@@ -211,6 +210,6 @@
     </div>
 </div>
 {% endblock %}
-<!--
+
 <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
-<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>-->
+<script type="text/javascript" src="{{url_for('static', filename = 'js/bootstrap.min.js')}}"></script>

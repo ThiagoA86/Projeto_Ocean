@@ -82,7 +82,6 @@
                   <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalDelete{{ row[0] }}" title="Remover conjunto de dados"><span class="glyphicon glyphicon-trash"></span></button>
                </td>
             </tr>
-
             <!-- Formulário de Edição de conjunto de dados -->
             <div id="modalEdit{{ row[0] }}" class="modal fade" role="dialog">
                <div class="modal-dialog">
@@ -228,6 +227,7 @@
                <!--Metodo Ds_insert App.py-->
                <!--action=""-->
                <form action="{{url_for('conjunto_dados.ds_insert')}}" method="POST">
+                  {{ formulario.hidden_tag() }}
                   {{ formulario.csrf_token }}
                   <div class="form-group">
                      {{formulario.titulo.label}}

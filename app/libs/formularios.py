@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField 
-from wtforms import DecimalField, RadioField, SelectField, TextAreaField,FileField 
+from wtforms import StringField, PasswordField, BooleanField,SelectField, FileField  
 from wtforms.validators import DataRequired, InputRequired, Length
 from flask_wtf.file import FileAllowed, FileRequired
 from werkzeug.security import generate_password_hash 
@@ -8,19 +7,19 @@ from werkzeug.security import generate_password_hash
 
 
 ########################################################
-#################  CLASS FORMULARIO  ###################
+#################  CLASS FORMULARIOS  ##################
 ########################################################
 
 class Form_Conexao(FlaskForm):
 
     #Atributos da CONEXAO#
-    nome_conexao = StringField('Nome da Conexão', validators=[InputRequired()])
-    host = StringField('Host',validators=[DataRequired(), Length(min=7, max=16)])
-    porta = StringField('Host',validators=[DataRequired(), Length(min=4, max=4)])
-    database = StringField('Database', validators=[InputRequired()])
-    username = StringField('Username', validators=[InputRequired()])
-    password = PasswordField('Password', validators=[InputRequired()]) 
-    driver = SelectField('Driver', choices=[('oracle', 'Oracle'), ('postgresql', 'PostgreSQL')]) 
+    nome_conexao = StringField('Nome da Conexão:', validators=[InputRequired()])
+    host = StringField('Host:',validators=[DataRequired(), Length(min=7, max=16)])
+    porta = StringField('Porta:',validators=[DataRequired(), Length(min=4, max=4)])
+    database = StringField('Database:', validators=[InputRequired()])
+    username = StringField('Username:', validators=[InputRequired()])
+    password = PasswordField('Password:', validators=[InputRequired()]) 
+    driver = SelectField('Driver:', choices=[('oracle', 'Oracle'), ('postgresql', 'PostgreSQL')]) 
 
 class Form_Conjunto_de_dados(FlaskForm):
     #Atributos da CONJUNTO DE DADOS#
