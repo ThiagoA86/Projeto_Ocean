@@ -13,7 +13,7 @@
     <!-- Disponibiliza o link de download ( caso haja ) -->
     {% if arquivo_concatenado %}
     <p>
-        <a class="btn btn-info" href="{{url_for('concatenar_tabela.download_file', file=arquivo_concatenado)}}">Download</a>
+        <a class="btn btn-info" id='Baixar' href="{{url_for('concatenar_tabela.download_file', file=arquivo_concatenado)}}">Download</a>
     </p>
     {% endif %}
 </p>

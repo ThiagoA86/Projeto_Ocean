@@ -19,7 +19,7 @@ def index():
 @bp.route('/upload', methods=('GET','POST'))
 def upload():
     formulario = Form_Concatenar()
-    if formulario.validate_on_submit():
+    if request.method == 'POST' and formulario.validate():
       # recupera o arquivo enviado no request usando o post
       print(f' Validação Oi Oi Ola')
     # Salvando arquivo 1

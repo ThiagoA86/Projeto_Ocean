@@ -50,7 +50,7 @@ def ds_insert():
 def ds_edit(id):
     #Instânciando a Classe Formulario para usar na função. 
     formulario = Form_Conjunto_de_dados()
-    if request.method == 'POST':
+    if request.method == 'POST' and formulario.validate():
         new_titulo = formulario.titulo.data
         if new_titulo == '':
             flash("O nome do conjunto de dados não pode ficar vazio!", 'error')

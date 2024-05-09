@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block title %} Conversor PDF para TXT {% endblock %}
 {% block content %}
-  <link rel="stylesheet" href="../static/css/style_conversor.css">
+  <link rel="stylesheet" href="../static/css/style_conversor.css">  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+
   <title>Download arquivo</title>
 
 
@@ -14,4 +17,17 @@
       {% endif %}
     </div>
   </div>
+<script>
+
+    $("button").click(function(){
+      $("button").hide("slow", function(){
+          //alert("Download Realizado");
+          $('h2').text('Download Iniciado')
+          setTimeout(function() {
+            window.location.href = 'http://127.0.0.1:5000/conversor/';
+            }, 2500);
+          
+        });
+  });
+</script>
   {% endblock %}

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField,SelectField, FileField  
+from wtforms import StringField, PasswordField, BooleanField,SelectField, SubmitField  
 from wtforms.validators import DataRequired, InputRequired, Length
-from flask_wtf.file import FileAllowed, FileRequired
+from flask_wtf.file import FileAllowed, FileRequired,FileField
 from werkzeug.security import generate_password_hash 
 
 
@@ -34,12 +34,15 @@ class Form_Conjunto_de_dados(FlaskForm):
     atualizacao_automatica = BooleanField('Atualização automática.')
     criar_metadados =BooleanField('Criar os metadados ao adicionar.')
     ultima_atu= StringField('Última atualização:')
+    
 class Form_Conversor(FlaskForm):     
      #Atributos do CONVERSOR#
     arquivo = FileField('Selecione um arquivo PDF:',validators=[FileRequired(),FileAllowed(['pdf'],'Apenas arquivos PDF são permitidos.')])
+    submit = SubmitField('Converter')
     
 class Form_Concatenar(FlaskForm):     
      #Atributos do CONTENARR#
     arquivo1 = FileField('Arquivo 1:',validators=[FileRequired(),FileAllowed(['csv'],'Apenas arquivos CSV são permitidos.')])
     arquivo2 = FileField('Arquivo 2:',validators=[FileRequired(),FileAllowed(['csv'],'Apenas arquivos CSV são permitidos.')])
+    submit = SubmitField('Concatenar')
     #Atributos do LOGIN#

@@ -32,7 +32,8 @@
                 <div id="targetLayer" style="display:none;"></div>
 
                 <p>
-                    <button class="btn btn-primary" type="submit" id="uploadSubmit">Concatenar</button>
+                    {{formulario.submit(class='btn btn-primary',id='uploadSubmit')}}
+                   
                 </p>
 
             </form>
@@ -85,12 +86,28 @@ $(document).ready(function(){
                     $('#targetLayer').show();
                     $('#targetLayer').append(data.htmlresponse);
                     $('#uploadSubmit').hide();
+                    $('.table').hide();
+                    $("#Baixar").click(function(){
+                        $('p').hide('slow');
+                        $("#Baixar").hide("slow", function(){
+                            $('h2').html('<b>Download Iniciado</b>');
+                            //window.location.reload(2);
+                            setTimeout(function() {
+                                window.location.reload(2);
+                                }, 2500);
+                            
+                          });
+                    });
                 },
                 resetForm: true
             });
         }
         return false;
     });
+    
+   
 });
 </script>
+
+
 {% endblock %}
