@@ -67,6 +67,9 @@ def create_app(config_class=Config):
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
+    from app.conjunto_dados import bp as conjunto_dados_bp
+    app.register_blueprint(conjunto_dados_bp,url_prefix='/conjunto_dados')
+
     from app.conversor import bp as conversor_bp
     app.register_blueprint(conversor_bp, url_prefix='/conversor')
 
@@ -76,8 +79,7 @@ def create_app(config_class=Config):
     from app.concatenar_tabela import bp as concatenar_tabela_bp
     app.register_blueprint(concatenar_tabela_bp,url_prefix='/concatenar_tabela')
 
-    from app.conjunto_dados import bp as conjunto_dados_bp
-    app.register_blueprint(conjunto_dados_bp,url_prefix='/conjunto_dados')
+    
 
    
 

@@ -89,31 +89,31 @@
                                     {{ formulario.hidden_tag() }}    
                                     <div class="form-group">
                                         {{formulario.driver.label}}
-                                        {{formulario.driver(value=row[2],class="form-control")}}
+                                        {{formulario.driver(value=row[2],class="form-control",id=False)}}
                                     </div>
                                     <div class="form-group">
                                         {{formulario.nome_conexao.label}}
-                                        {{formulario.nome_conexao(value=row[1],class="form-control")}}
+                                        {{formulario.nome_conexao(value=row[1],class="form-control",id=False)}}
                                     </div>
                                     <div class="form-group">
                                         {{formulario.host.label}}
-                                        {{formulario.host(value=row[3],class="form-control")}}
+                                        {{formulario.host(value=row[3],class="form-control",id=False)}}
                                     </div>
                                     <div class="form-group">
                                         {{formulario.porta.label}}
-                                        {{formulario.porta(value=row[4],class="form-control")}}
+                                        {{formulario.porta(value=row[4],class="form-control",id=False)}}
                                     </div>
                                     <div class="form-group">
                                         {{formulario.database.label}}
-                                        {{formulario.database(value=row[5],class="form-control")}}
+                                        {{formulario.database(value=row[5],class="form-control",id=False)}}
                                     </div>
                                     <div class="form-group">
                                         {{formulario.username.label}}
-                                        {{formulario.username(value=row[6],class="form-control")}}
+                                        {{formulario.username(value=row[6],class="form-control",id=False)}}
                                     </div>
                                     <div class="form-group">
                                         {{formulario.password.label}}
-                                        {{formulario.password(value=row[7],class="form-control")}}
+                                        {{formulario.password(value=row[7],class="form-control",id=False)}}
                                     </div>
                                     <div class="form-group text-center">
                                         <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span> Atualizar</button>
