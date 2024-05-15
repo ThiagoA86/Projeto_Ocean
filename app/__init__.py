@@ -79,6 +79,9 @@ def create_app(config_class=Config):
     from app.concatenar_tabela import bp as concatenar_tabela_bp
     app.register_blueprint(concatenar_tabela_bp,url_prefix='/concatenar_tabela')
 
+    from app.login import bp as login_bp
+    app.register_blueprint(login_bp,url_prefix='/login')
+
     
 
    
